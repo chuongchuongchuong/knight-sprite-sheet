@@ -7,9 +7,9 @@ public class ScriptMovement : MonoBehaviour
     public int speed;
     public int jumpForce;
     public float moveX;
-    private bool canMove = true;
-    
 
+
+    private ScriptAnimation scriptAnimation;
     private SpriteRenderer spriteRenderer;
     private ScriptCheck scriptCheck;
     private Rigidbody2D rb;
@@ -19,6 +19,7 @@ public class ScriptMovement : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         scriptCheck = GetComponent<ScriptCheck>();
+        scriptAnimation = GetComponent<ScriptAnimation>();
         rb = GetComponent<Rigidbody2D>();
     }
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class ScriptMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canMove)
+        if (scriptCheck.canMove)
         {
             moveX = Input.GetAxisRaw("Horizontal");
             transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
