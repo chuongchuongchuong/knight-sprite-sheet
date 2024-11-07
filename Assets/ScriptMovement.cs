@@ -5,13 +5,15 @@ using UnityEngine;
 public class ScriptMovement : MonoBehaviour
 {
     public int speed;
-    public float moveX;
     public int jumpForce;
+    public float moveX;
+    private bool canMove = true;
+    
 
     private SpriteRenderer spriteRenderer;
     private ScriptCheck scriptCheck;
     private Rigidbody2D rb;
-    
+
 
     private void Awake()
     {
@@ -28,16 +30,19 @@ public class ScriptMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveX = Input.GetAxisRaw("Horizontal");
-        transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
+        if (canMove)
+        {
+            moveX = Input.GetAxisRaw("Horizontal");
+            transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
 
-        if (moveX > 0) spriteRenderer.flipX = false;
-        if (moveX < 0) spriteRenderer.flipX = true;
+            if (moveX > 0) spriteRenderer.flipX = false;
+            if (moveX < 0) spriteRenderer.flipX = true;
 
 
-        while (scriptCheck.isGrounded)
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (scriptCheck.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
                 rb.velocity = Vector2.up * jumpForce;
+        }
+
 
     }
 }
