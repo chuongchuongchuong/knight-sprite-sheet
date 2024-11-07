@@ -1,12 +1,12 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScriptCheck : MonoBehaviour
 {
-    public bool isGrounded;
-    public bool canMove = true;
+    public bool isGrounded; // biến để check xem có chạm đất ko
+    public bool canMove = true; // biến để khóa không cho di chuyển
 
     private ScriptAnimation scriptAnimation;
     private Slider healthbar;
@@ -25,9 +25,10 @@ public class ScriptCheck : MonoBehaviour
             isGrounded = true;
 
         if (other.gameObject.CompareTag("Enemy"))
+        {
             healthbar.value--;
-
-
+            healthbar.GetComponentInChildren<Text>().text = "máu: " + healthbar.value + "/3";
+        }
 
     }
 

@@ -31,18 +31,18 @@ public class ScriptMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (scriptCheck.canMove)
-        {
-            moveX = Input.GetAxisRaw("Horizontal");
-            transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
+        if (!scriptCheck.canMove) return;
 
-            if (moveX > 0) spriteRenderer.flipX = false;
-            if (moveX < 0) spriteRenderer.flipX = true;
+        moveX = Input.GetAxisRaw("Horizontal");
+        transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
+
+        if (moveX > 0) spriteRenderer.flipX = false;
+        if (moveX < 0) spriteRenderer.flipX = true;
 
 
-            if (scriptCheck.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
-                rb.velocity = Vector2.up * jumpForce;
-        }
+        if (scriptCheck.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+            rb.velocity = Vector2.up * jumpForce;
+
 
 
     }
