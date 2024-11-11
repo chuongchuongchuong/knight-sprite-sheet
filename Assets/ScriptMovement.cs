@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,7 +43,17 @@ public class ScriptMovement : MonoBehaviour
         if (scriptCheck.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
             rb.velocity = Vector2.up * jumpForce;
 
+    }
 
+    //Khi di chuyển vào quái thì sẽ bị đẩy lùi
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            if (moveX >= 0) rb.velocity = new Vector2(-1, 1) * jumpForce / 2;
+            else if (moveX < 0) rb.velocity = new Vector2(1, 1) * jumpForce / 2;
+
+        }
 
     }
 }

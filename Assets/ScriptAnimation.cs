@@ -13,7 +13,7 @@ public class ScriptAnimation : MonoBehaviour
     private GameObject gameOver;
 
     public int state;
-    //0: idle, 1:walk, 2: jump, 3: attack
+    //0: idle, 1:walk, 2: jump, 3: attack, 4: hurt
 
     private void Awake()
     {
@@ -22,7 +22,8 @@ public class ScriptAnimation : MonoBehaviour
         scriptCheck = GetComponent<ScriptCheck>();
         scriptMovement = GetComponent<ScriptMovement>();
         healthbar = GameObject.Find("Slider").GetComponent<Slider>();
-        gameOver= GameObject.Find("GameOver");
+        gameOver = GameObject.Find("GameOver");
+        gameOver.GetComponentInChildren<Button>().onClick.AddListener(PlayAgain);// Onclick cái nút PlayAgain
     }
     // Start is called before the first frame update
     void Start()
@@ -65,7 +66,7 @@ public class ScriptAnimation : MonoBehaviour
 
         }
 
-        if (healthbar.value == 0 && state != 12)
+        if (healthbar.value == 0)
         {
             state = 12;// chuyển sang trạng thái chết
             scriptCheck.canMove = false;// khi chết thì ko di chuyển được
@@ -74,15 +75,43 @@ public class ScriptAnimation : MonoBehaviour
         Anim.SetInteger("state", state);
     }
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy")) // nếu cham vào enemy thì sẽ hurt
+            Anim.SetInteger("state", 11);
 
+        else if (other.gameObject.CompareTag("checkpoint"))
+        {
+            Anim.SetInteger("state", 13);// nếu đi vào điểm chcekpoint thì thắng
+            scriptCheck.canMove = false;
+            Debug.Log("Win");
+        }
+    }
+
+
+    //Chuyển từ bị thương sang idle
+    public void Hurt2Idle()
+    {
+        if (scriptCheck.healthbar.value != 0)
+            Anim.SetInteger("state", 0);
+
+    }
+
+    //Chuyển từ tấn công sang Idle
     public void Attack2Idle()
     {
         state = 0; Anim.SetInteger("state", state);
         scriptCheck.canMove = true;// sau khi tấn công xong là lại di chuyển được
     }
 
+    //Chết
     public void Die()
     {
         gameOver.SetActive(true);
-    }    
+    }
+
+    void PlayAgain()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+    }
 }

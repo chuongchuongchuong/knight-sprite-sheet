@@ -9,7 +9,7 @@ public class ScriptCheck : MonoBehaviour
     public bool canMove = true; // biến để khóa không cho di chuyển
 
     private ScriptAnimation scriptAnimation;
-    private Slider healthbar;
+    public Slider healthbar;
     //private Animator anim;
 
     private void Awake()
