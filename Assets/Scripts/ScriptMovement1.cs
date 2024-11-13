@@ -11,14 +11,14 @@ public class ScriptMovement1 : MonoBehaviour
 
     private ScriptAnimation1 scriptAnimation;
     private SpriteRenderer spriteRenderer;
-    private ScriptCheck1 scriptCheck1;
+    private ScriptChecknUI1 scriptCheck1;
     private Rigidbody2D rb;
 
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        scriptCheck1 = GetComponent<ScriptCheck1>();
+        scriptCheck1 = GetComponent<ScriptChecknUI1>();
         scriptAnimation = GetComponent<ScriptAnimation1>();
         rb = GetComponent<Rigidbody2D>();
     }
@@ -45,9 +45,7 @@ public class ScriptMovement1 : MonoBehaviour
 
         if (scriptAnimation.state == 1 && Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (moveX > 0) rb.velocity = Vector2.right * jumpForce;
-            if (moveX < 0) rb.velocity = Vector2.left * jumpForce;
-
+            rb.velocity = new Vector2(moveX, 0) * jumpForce * 2 / 3;
         }
 
 

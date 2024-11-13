@@ -7,7 +7,7 @@ public class ScriptAnimation1 : MonoBehaviour
 {
     private Animator Anim;
     private Rigidbody2D rb;
-    private ScriptCheck1 scriptCheck;
+    private ScriptChecknUI1 scriptChecknUI;
     private ScriptMovement1 scriptMovement;
     private Slider healthbar1;
     private GameObject gameOver;
@@ -19,7 +19,7 @@ public class ScriptAnimation1 : MonoBehaviour
     {
         Anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        scriptCheck = GetComponent<ScriptCheck1>();
+        scriptChecknUI = GetComponent<ScriptChecknUI1>();
         scriptMovement = GetComponent<ScriptMovement1>();
         healthbar1 = GameObject.Find("HealthBar1").GetComponent<Slider>();
         gameOver = GameObject.Find("GameOver");
@@ -41,7 +41,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 if (rb.velocity.y > .1) state = 2; // đang đứng im thì nhảy
                 if (Input.GetKeyDown(KeyCode.Z)) // đang đứng, ấm a là đánh
                 {
-                    Anim.SetTrigger("Attack"); scriptCheck.blockMove = true; // đang chém thì ko di chuyển được
+                    Anim.SetTrigger("Attack"); scriptChecknUI.blockMove = true; // đang chém thì ko di chuyển được
                 }
 
                 break;
@@ -53,7 +53,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 {
                     Anim.SetTrigger("Attack");
                     state = 3;
-                    scriptCheck.blockMove = true;// đang chém thì ko di chuyển được
+                    scriptChecknUI.blockMove = true;// đang chém thì ko di chuyển được
                 }
 
                 if (Input.GetKeyDown(KeyCode.DownArrow)) // đang chạy ấn Z là đánh
@@ -67,10 +67,10 @@ public class ScriptAnimation1 : MonoBehaviour
                 break;
 
             case 2:// đang nhảy
-                if (scriptCheck.isGrounded) state = 0;// đang rơi thành xuống mặt đất
-                if (scriptCheck.checkWin)// chạm vào checkpoint thì win
+                if (scriptChecknUI.isGrounded) state = 0;// đang rơi thành xuống mặt đất
+                if (scriptChecknUI.checkWin)// chạm vào checkpoint thì win
                 {
-                    state = 13; scriptCheck.blockMove = true;
+                    state = 13; scriptChecknUI.blockMove = true;
                 }
 
                 if (Input.GetKeyDown(KeyCode.Z)) // đang nhảy ấn Z là JumpAttack
@@ -81,21 +81,13 @@ public class ScriptAnimation1 : MonoBehaviour
 
         }
 
-        if (healthbar1.value == 0)
-        {
-            state = 12;// chuyển sang trạng thái chết
-            scriptCheck.blockMove = true;// khi chết thì ko di chuyển được
-        }
+        
 
-        // Check if character is out of camera bounds
-        Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
-        bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 && screenPoint.y > 0;
-        if (!onScreen)
+        if(scriptChecknUI.IsDead())// check xem có chết ko
         {
-            // Trigger game over
-            gameOver.SetActive(true);
-            scriptCheck.blockMove = true;
-        }
+            state = 13;
+            scriptChecknUI.blockMove = true;
+        }    
 
         Anim.SetInteger("state", state);
     }
@@ -110,7 +102,7 @@ public class ScriptAnimation1 : MonoBehaviour
     //Chuyển từ bị thương sang idle
     public void Hurt2Idle()
     {
-        if (scriptCheck.healthBar1.value != 0)
+        if (scriptChecknUI.healthBar1.value != 0)
             Anim.SetInteger("state", 0);
 
     }
@@ -119,12 +111,12 @@ public class ScriptAnimation1 : MonoBehaviour
     public void Attack2Idle()
     {
         state = 0;
-        scriptCheck.blockMove = false;// sau khi tấn công xong là lại di chuyển được
+        scriptChecknUI.blockMove = false;// sau khi tấn công xong là lại di chuyển được
     }
 
     public void UnlockMove()
     {
-        scriptCheck.blockMove = false;
+        scriptChecknUI.blockMove = false;
     }    
 
     //Chết

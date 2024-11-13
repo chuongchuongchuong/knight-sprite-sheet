@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScriptCheck1 : MonoBehaviour
+public class ScriptChecknUI1 : MonoBehaviour
 {
     public bool isGrounded; // biến để check xem có chạm đất ko
     public bool blockMove = false; // biến để khóa không cho di chuyển
@@ -32,4 +32,10 @@ public class ScriptCheck1 : MonoBehaviour
         if (other.gameObject.CompareTag("ground"))
             isGrounded = false;
     }
+
+    public bool IsDead() // nếu hết màu thì chết
+    {
+        if (healthBar1.value == 0) return true;
+        else return false;
+    }    
 }
