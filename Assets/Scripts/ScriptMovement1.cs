@@ -38,9 +38,8 @@ public class ScriptMovement1 : MonoBehaviour
         moveX = Input.GetAxisRaw("Horizontal");
         transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
 
-        if (moveX > 0) spriteRenderer.flipX = false;
-        if (moveX < 0) spriteRenderer.flipX = true;
-
+        if (transform.localScale.x == 1 && moveX < 0) Flip(); // quay mặt nhân vật
+        if (transform.localScale.x == -1 && moveX > 0) Flip();
 
         if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
             rb.velocity = Vector2.up * jumpForce;
@@ -64,5 +63,12 @@ public class ScriptMovement1 : MonoBehaviour
 
         }
 
+    }
+
+    void Flip()
+    {
+        Vector3 temp = transform.localScale;
+        temp.x *= -1;
+        transform.localScale = temp;
     }
 }
