@@ -12,6 +12,7 @@ public class ScriptMovement1 : MonoBehaviour
     private ScriptAnimation1 scriptAnimation;
     private SpriteRenderer spriteRenderer;
     private ScriptChecknUI1 scriptCheck1;
+    private ScriptCheckGrounded scriptCheckGrounded;
     private Rigidbody2D rb;
 
 
@@ -20,6 +21,7 @@ public class ScriptMovement1 : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         scriptCheck1 = GetComponent<ScriptChecknUI1>();
         scriptAnimation = GetComponent<ScriptAnimation1>();
+        scriptCheckGrounded = GetComponentInChildren<ScriptCheckGrounded>();
         rb = GetComponent<Rigidbody2D>();
     }
     // Start is called before the first frame update
@@ -40,7 +42,7 @@ public class ScriptMovement1 : MonoBehaviour
         if (moveX < 0) spriteRenderer.flipX = true;
 
 
-        if (scriptCheck1.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
             rb.velocity = Vector2.up * jumpForce;
 
         if (scriptAnimation.state == 1 && Input.GetKeyDown(KeyCode.DownArrow))

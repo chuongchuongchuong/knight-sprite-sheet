@@ -9,6 +9,7 @@ public class ScriptAnimation1 : MonoBehaviour
     private Rigidbody2D rb;
     private ScriptChecknUI1 scriptChecknUI;
     private ScriptMovement1 scriptMovement;
+    private ScriptCheckGrounded scriptCheckGrounded;
     private Slider healthbar1;
     private GameObject gameOver;
 
@@ -22,6 +23,7 @@ public class ScriptAnimation1 : MonoBehaviour
         scriptChecknUI = GetComponent<ScriptChecknUI1>();
         scriptMovement = GetComponent<ScriptMovement1>();
         healthbar1 = GameObject.Find("HealthBar1").GetComponent<Slider>();
+        scriptCheckGrounded = GetComponentInChildren<ScriptCheckGrounded>();
         gameOver = GameObject.Find("GameOver");
         gameOver.GetComponentInChildren<Button>().onClick.AddListener(PlayAgain);// Onclick cái nút PlayAgain
     }
@@ -67,11 +69,8 @@ public class ScriptAnimation1 : MonoBehaviour
                 break;
 
             case 2:// đang nhảy
-                if (scriptChecknUI.isGrounded) state = 0;// đang rơi thành xuống mặt đất
-                if (scriptChecknUI.checkWin)// chạm vào checkpoint thì win
-                {
-                    state = 13; scriptChecknUI.blockMove = true;
-                }
+                if (scriptCheckGrounded.isGrounded && scriptMovement.moveX == 0) state = 0;// đang rơi thành xuống mặt đất
+                if (scriptCheckGrounded.isGrounded && scriptMovement.moveX != 0) state = 1;// đang rơi thành chạy
 
                 if (Input.GetKeyDown(KeyCode.Z)) // đang nhảy ấn Z là JumpAttack
                     Anim.SetTrigger("JumpAttack");
@@ -81,13 +80,13 @@ public class ScriptAnimation1 : MonoBehaviour
 
         }
 
-        
 
-        if(scriptChecknUI.IsDead())// check xem có chết ko
+
+        if (scriptChecknUI.IsDead())// check xem có chết ko
         {
             state = 13;
             scriptChecknUI.blockMove = true;
-        }    
+        }
 
         Anim.SetInteger("state", state);
     }
@@ -117,7 +116,7 @@ public class ScriptAnimation1 : MonoBehaviour
     public void UnlockMove()
     {
         scriptChecknUI.blockMove = false;
-    }    
+    }
 
     //Chết
     public void Die()
