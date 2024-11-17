@@ -11,7 +11,7 @@ public class ScriptAnimation2 : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        ScriptMovement2 = GetComponent<ScriptMovement2>();
+        ScriptMovement2 = GetComponentInParent<ScriptMovement2>();
     }
     // Start is called before the first frame update
     void Start()

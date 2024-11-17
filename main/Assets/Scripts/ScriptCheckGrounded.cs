@@ -6,17 +6,17 @@ public class ScriptCheckGrounded : MonoBehaviour
 {
     public bool isGrounded;
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (other.CompareTag("ground"))
+        if (hitInfo.CompareTag("ground"))
         {
             isGrounded = true;
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D hitInfo)
     {
-        if (other.CompareTag("ground"))
+        if (hitInfo.CompareTag("ground"))
         {
             isGrounded = false;
         }

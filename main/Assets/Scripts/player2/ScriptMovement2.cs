@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class ScriptMovement2 : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
-
     public int speed;
+    public int jumpForce;
     public Vector2 moveInput;
     public bool blockMove = false;
-
     public bool isFlyin = false;
+
+    private Rigidbody2D rb;
+    private ScriptCheckGrounded scriptCheckGrounded;
+    //private
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        scriptCheckGrounded = GetComponentInChildren<ScriptCheckGrounded>();
     }
     // Start is called before the first frame update
     void Start()
@@ -26,12 +29,23 @@ public class ScriptMovement2 : MonoBehaviour
     void Update()
     {
         if (blockMove) return;// nếu bị khóa di chuyển thì không di chuyển được
-        
+
         moveInput.x = Input.GetAxisRaw("Horizontal2");
         if (isFlyin) moveInput.y = Input.GetAxisRaw("Vertical2");
         transform.Translate(speed * Time.deltaTime * moveInput);
+        Flip(); // quay mặt nhân vật
 
-        if (moveInput.x > 0) spriteRenderer.flipX = false;
-        if (moveInput.x < 0) spriteRenderer.flipX = true;
+        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.W))
+            rb.velocity = Vector2.up * jumpForce;
+    }
+
+    void Flip()
+    {
+        if (transform.localScale.x > 0 && moveInput.x > 0 || transform.localScale.x < 0 && moveInput.x < 0)
+        {
+            Vector3 temp = transform.localScale;
+            temp.x *= -1;
+            transform.localScale = temp;
+        }
     }
 }

@@ -20,6 +20,6 @@ public class ScriptDragonHealthBar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dragonHealthbar.value=
+        //dragonHealthbar.value=
     }
 }
