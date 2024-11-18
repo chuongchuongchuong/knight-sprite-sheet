@@ -15,12 +15,8 @@ public class ScriptFiring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform2.localScale.x > 0 && Input.GetKeyDown(KeyCode.Z))
-            Instantiate(bullet, transform.position, Quaternion.Euler(0, 180, 0));
-        else if (transform2.localScale.x < 0 && Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
             Instantiate(bullet, transform.position, transform.rotation);
-        
-        //if (Input.GetKeyDown(KeyCode.Z)) Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, 180));
     }
 
 }

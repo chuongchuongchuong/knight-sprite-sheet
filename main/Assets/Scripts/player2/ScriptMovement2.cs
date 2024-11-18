@@ -32,7 +32,7 @@ public class ScriptMovement2 : MonoBehaviour
 
         moveInput.x = Input.GetAxisRaw("Horizontal2");
         if (isFlyin) moveInput.y = Input.GetAxisRaw("Vertical2");
-        transform.Translate(speed * Time.deltaTime * moveInput);
+        transform.Translate(moveInput * speed * Time.deltaTime);
         Flip(); // quay mặt nhân vật
 
         if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.W))
@@ -41,7 +41,7 @@ public class ScriptMovement2 : MonoBehaviour
 
     void Flip()
     {
-        if (transform.localScale.x > 0 && moveInput.x > 0 || transform.localScale.x < 0 && moveInput.x < 0)
+        if ((transform.localScale.x > 0 && moveInput.x > 0) || (transform.localScale.x < 0 && moveInput.x < 0))
         {
             Vector3 temp = transform.localScale;
             temp.x *= -1;
