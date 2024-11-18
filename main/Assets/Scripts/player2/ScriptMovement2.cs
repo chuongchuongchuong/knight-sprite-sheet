@@ -30,12 +30,12 @@ public class ScriptMovement2 : MonoBehaviour
     {
         if (blockMove) return;// nếu bị khóa di chuyển thì không di chuyển được
 
-        moveInput.x = Input.GetAxisRaw("Horizontal2");
-        if (isFlyin) moveInput.y = Input.GetAxisRaw("Vertical2");
+        moveInput.x = Input.GetAxisRaw("Horizontal");
+        if (isFlyin) moveInput.y = Input.GetAxisRaw("Vertical");
         transform.Translate(moveInput * speed * Time.deltaTime);
         Flip(); // quay mặt nhân vật
 
-        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.W))
+        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
             rb.velocity = Vector2.up * jumpForce;
     }
 

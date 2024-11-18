@@ -23,7 +23,7 @@ public class ScriptAnimation1 : MonoBehaviour
         rb = GetComponentInParent<Rigidbody2D>();
 
         scriptMovement1 = GetComponentInParent<ScriptMovement1>();
-        scriptHealth1= transform.parent.GetComponentInChildren<ScriptHealth1>();
+        scriptHealth1 = transform.parent.GetComponentInChildren<ScriptHealth1>();
 
         scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
         gameOver = GameObject.Find("GameOver");
@@ -43,7 +43,7 @@ public class ScriptAnimation1 : MonoBehaviour
             case 0:
                 if (scriptMovement1.moveX != 0) state = 1; //đang đứng im thành chạy
                 if (Mathf.Abs(rb.velocity.y) > .1) state = 2; // đang đứng im thì nhảy
-                if (Input.GetKeyDown(KeyCode.Z)) // đang đứng, ấm a là đánh
+                if (Input.GetKeyDown(KeyCode.J)) // đang đứng, ấm a là đánh
                 {
                     Anim.SetTrigger("Attack");
                     state = 3;
@@ -55,7 +55,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 if (scriptMovement1.moveX == 0) state = 0; //đang chạy thành đứng im
                 if (Mathf.Abs(rb.velocity.y) > .1) state = 2; //đang chạy thì nhảy hoặc rơi
 
-                if (Input.GetKeyDown(KeyCode.Z)) // đang chạy ấn Z là đánh
+                if (Input.GetKeyDown(KeyCode.J)) // đang chạy ấn Z là đánh
                 {
                     Anim.SetTrigger("Attack");
                     state = 3;
@@ -76,7 +76,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX == 0) state = 0;// đang rơi thành xuống mặt đất
                 if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX != 0) state = 1;// đang rơi thành chạy
 
-                if (Input.GetKeyDown(KeyCode.Z)) // đang nhảy ấn Z là JumpAttack
+                if (Input.GetKeyDown(KeyCode.J)) // đang nhảy ấn Z là JumpAttack
                     Anim.SetTrigger("JumpAttack");
                 break;
 
@@ -99,6 +99,7 @@ public class ScriptAnimation1 : MonoBehaviour
     {
         state = 0;
         scriptMovement1.blockMove = false;
+        transform.parent.GetComponentInChildren<ScriptSlash>().Slash();
     }
 
 
@@ -119,7 +120,7 @@ public class ScriptAnimation1 : MonoBehaviour
     //Chết
     public void Die()
     {
-        Debug.Log("h");
+        //Debug.Log("h");
         gameOver.GetComponentInChildren<Text>().text = "Dragon Won";
         gameOver.SetActive(true);
     }
@@ -127,7 +128,7 @@ public class ScriptAnimation1 : MonoBehaviour
     {
         gameOver.GetComponentInChildren<Text>().text = "U Won";
         gameOver.SetActive(true);
-        Debug.Log("Oke");
+        //Debug.Log("Oke");
     }
 
     void PlayAgain()
