@@ -5,14 +5,14 @@ using UnityEngine;
 public class ScriptSlash : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
-    private scriptHealth2 scriptHealth2;
+    private ScriptHealth2 scriptHealth2;
 
     int damage = 10;
 
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        scriptHealth2 = GameObject.Find("Player2: Dragon").GetComponentInChildren<scriptHealth2>();
+        scriptHealth2 = GameObject.Find("Player2: Dragon").GetComponentInChildren<ScriptHealth2>();
     }
 
     private void Start()

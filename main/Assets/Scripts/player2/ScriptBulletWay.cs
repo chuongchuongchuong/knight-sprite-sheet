@@ -22,20 +22,23 @@ public class ScriptBulletWay : MonoBehaviour
     void Start()
     {
         if (transform2.localScale.x > 0) GetComponent<SpriteRenderer>().flipX = true;
-        rb.velocity = Vector2.left * speed * transform2.localScale.x;
-
-
-        //rb.velocity = Vector2.right * speed;
+        //rb.velocity = Vector2.left * speed * transform2.localScale.x;
+    }
+    private void Update()
+    {
+        transform.Translate(Vector2.left * speed * transform2.localScale.x * Time.deltaTime);
     }
 
     public void OnCollisionEnter2D(Collision2D hitInfo)
     {
         if (hitInfo.gameObject.name == "Player1: knight")
         {
-            Instantiate(boom, transform.position, transform.rotation);
+            GameObject temp = Instantiate(boom, transform.position, transform.rotation);
             scriptHealth1.TakeDamage(damage);
 
             Destroy(gameObject);
+            Destroy(temp, .7f);
+
         }
 
         /*private void OnTriggerEnter2D(Collider2D hitInfo)

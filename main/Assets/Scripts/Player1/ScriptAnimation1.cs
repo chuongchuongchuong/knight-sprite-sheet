@@ -5,34 +5,31 @@ using UnityEngine.UI;
 
 public class ScriptAnimation1 : MonoBehaviour
 {
-    private Animator Anim;
+    private Animator anim;
     private Rigidbody2D rb;
 
     private ScriptMovement1 scriptMovement1;
     private ScriptCheckGrounded scriptCheckGrounded;
     private ScriptHealth1 scriptHealth1;
 
-    private GameObject gameOver;
-
     public int state;
     //0: idle, 1:walk, 2: jump, 3: attack, 4: hurt, 
 
     private void Awake()
     {
-        Anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
 
         scriptMovement1 = GetComponentInParent<ScriptMovement1>();
         scriptHealth1 = transform.parent.GetComponentInChildren<ScriptHealth1>();
 
         scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
-        gameOver = GameObject.Find("GameOver");
-        gameOver.GetComponentInChildren<Button>().onClick.AddListener(PlayAgain);// Onclick cái nút PlayAgain
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        gameOver.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -45,7 +42,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 if (Mathf.Abs(rb.velocity.y) > .1) state = 2; // đang đứng im thì nhảy
                 if (Input.GetKeyDown(KeyCode.J)) // đang đứng, ấm a là đánh
                 {
-                    Anim.SetTrigger("Attack");
+                    anim.SetTrigger("Attack");
                     state = 3;
                     scriptMovement1.blockMove = true; // đang chém thì ko di chuyển được
                 }
@@ -57,14 +54,14 @@ public class ScriptAnimation1 : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.J)) // đang chạy ấn Z là đánh
                 {
-                    Anim.SetTrigger("Attack");
+                    anim.SetTrigger("Attack");
                     state = 3;
                     scriptMovement1.blockMove = true;// đang chém thì ko di chuyển được
                 }
 
                 if (Input.GetKeyDown(KeyCode.DownArrow)) // đang chạy ấn xuống là dash
                 {
-                    Anim.SetTrigger("Dash");
+                    anim.SetTrigger("Dash");
                     //scriptCheck.blockMove = true;
                 }
 
@@ -77,7 +74,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX != 0) state = 1;// đang rơi thành chạy
 
                 if (Input.GetKeyDown(KeyCode.J)) // đang nhảy ấn Z là JumpAttack
-                    Anim.SetTrigger("JumpAttack");
+                    anim.SetTrigger("JumpAttack");
                 break;
 
             default: break;
@@ -92,7 +89,7 @@ public class ScriptAnimation1 : MonoBehaviour
             scriptMovement1.blockMove = true;
         }
 
-        Anim.SetInteger("state", state);
+        anim.SetInteger("state", state);
     }
 
     public void Attack2Idle()
@@ -107,7 +104,7 @@ public class ScriptAnimation1 : MonoBehaviour
     public void Hurt2Idle()
     {
         //if (scriptChecknUI.healthBar1.value != 0)
-        Anim.SetInteger("state", 0);
+        anim.SetInteger("state", 0);
 
     }
 
@@ -115,24 +112,5 @@ public class ScriptAnimation1 : MonoBehaviour
     public void UnlockMove()
     {
         scriptMovement1.blockMove = false;
-    }
-
-    //Chết
-    public void Die()
-    {
-        //Debug.Log("h");
-        gameOver.GetComponentInChildren<Text>().text = "Dragon Won";
-        gameOver.SetActive(true);
-    }
-    public void Win()
-    {
-        gameOver.GetComponentInChildren<Text>().text = "U Won";
-        gameOver.SetActive(true);
-        //Debug.Log("Oke");
-    }
-
-    void PlayAgain()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Battle");
     }
 }

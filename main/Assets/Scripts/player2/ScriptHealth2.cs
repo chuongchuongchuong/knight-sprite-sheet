@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scriptHealth2 : MonoBehaviour
+public class ScriptHealth2 : MonoBehaviour
 {
     private int maxHealth = 70;
     private Slider healthBar;

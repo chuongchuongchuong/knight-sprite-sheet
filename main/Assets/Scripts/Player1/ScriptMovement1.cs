@@ -13,13 +13,16 @@ public class ScriptMovement1 : MonoBehaviour
     private ScriptAnimation1 scriptAnimation;
     private ScriptCheckGrounded scriptCheckGrounded;
     private Rigidbody2D rb;
-
+    private ScriptHealth1 scriptHealth1;
+    private ScriptHealth2 scriptHealth2;
 
     private void Awake()
     {
         scriptAnimation = GetComponentInChildren<ScriptAnimation1>();
         scriptCheckGrounded = GetComponentInChildren<ScriptCheckGrounded>();
         rb = GetComponent<Rigidbody2D>();
+        scriptHealth1 = GameObject.Find("Health1").GetComponent<ScriptHealth1>(); // lấy component máu của cả 2 player
+        scriptHealth2 = GameObject.Find("Health2").GetComponent<ScriptHealth2>();
     }
     // Start is called before the first frame update
     void Start()
@@ -45,11 +48,16 @@ public class ScriptMovement1 : MonoBehaviour
             rb.velocity = new Vector2(moveX, 0) * jumpForce * 2 / 3;
         }
 
+        if (scriptHealth1.isDead() || scriptHealth2.isDead())
+        {
+            blockMove = true;
+        }
+
     }
 
     void Flip()
     {
-        if ((transform.localScale.x == 1 && moveX < 0) || (transform.localScale.x == -1 && moveX > 0))
+        if ((transform.localScale.x > 0 && moveX < 0) || (transform.localScale.x < 0 && moveX > 0))
         {
             Vector3 temp = transform.localScale;
             temp.x *= -1;
