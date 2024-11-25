@@ -33,35 +33,41 @@ public class ScriptMovement1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (blockMove) return;
+        if (blockMove) return;// nếu blockMove thì sẽ không di chuyển được nữa
 
-        moveX = Input.GetAxisRaw("Horizontal2");
-        transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
-        Flip();
-
-
-        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.W))
-            rb.velocity = Vector2.up * jumpForce;
+        MovenJump();// di chuyển và nhảy
 
         if (scriptAnimation.state == 1 && Input.GetKeyDown(KeyCode.DownArrow))// đây là hành động dash
         {
             rb.velocity = new Vector2(moveX, 0) * jumpForce * 2 / 3;
         }
 
-        if (scriptHealth1.isDead() || scriptHealth2.isDead())
+        if (scriptHealth1.isDead() || scriptHealth2.isDead())// nếu 1 trong 2 đối thủ hết máu
         {
             blockMove = true;
         }
 
     }
 
-    void Flip()
+
+    void MovenJump()
     {
-        if ((transform.localScale.x > 0 && moveX < 0) || (transform.localScale.x < 0 && moveX > 0))
+        moveX = Input.GetAxisRaw("Horizontal2");
+        transform.Translate(moveX * speed * Time.deltaTime, 0, 0);
+        Flip();// // Hàm này làm quay mặt player lại
+
+        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.W))// đây là code nhảy lên
+            rb.velocity = Vector2.up * jumpForce;
+
+        void Flip()
         {
-            Vector3 temp = transform.localScale;
-            temp.x *= -1;
-            transform.localScale = temp;
+            if ((transform.localScale.x > 0 && moveX < 0) || (transform.localScale.x < 0 && moveX > 0))
+            {
+                Vector3 temp = transform.localScale;
+                temp.x *= -1;
+                transform.localScale = temp;
+            }
         }
     }
+
 }

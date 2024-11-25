@@ -20,15 +20,15 @@ public class ScriptGameOver : MonoBehaviour
     }
     void Start()
     {
-        gameOver.SetActive(false);
+        gameOver.SetActive(false);// tắt csai UI panel cuối game đi
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (scriptHealth1.isDead()) Invoke("DragonWon", 4f);
-        if (scriptHealth2.isDead()) Invoke("KnightWon", 4f);
+        if (scriptHealth1.isDead()) Invoke(nameof(DragonWon), 4f);
+        if (scriptHealth2.isDead()) Invoke(nameof(KnightWon), 4f);
     }
 
     //xuất hiện bảng thông báo dragon thắng

@@ -35,6 +35,22 @@ public class ScriptMovement2 : MonoBehaviour
     {
         if (blockMove) return;// nếu bị khóa di chuyển thì không di chuyển được
 
+        MovenJump();
+
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("2_BreathFire"))// đây là lệnh check xem có phải là trạng thái 2, đang phun lửa không
+        {
+            blockMove = true;// nếu đúng thì sẽ khóa si chuyển lại
+            Invoke(nameof(UnlockMove), .5f);// nửa giây sau sẽ mở khóa di chuyển
+        }
+
+        if (scriptHealth1.isDead() || scriptHealth2.isDead())// khi 1 trong 2 player chết thì cả 2 sẽ không thể di chuyển được
+        {
+            blockMove = true;
+        }
+    }
+
+    void MovenJump()
+    {
         moveInput.x = Input.GetAxisRaw("Horizontal");
         if (isFlyin) moveInput.y = Input.GetAxisRaw("Vertical");
         transform.Translate(moveInput * speed * Time.deltaTime);// Di chuyển trái phải
@@ -43,27 +59,18 @@ public class ScriptMovement2 : MonoBehaviour
         if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))// chỗ này là code nhảy lên
             rb.velocity = Vector2.up * jumpForce;
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("2_BreathFire"))// đây là lệnh check xem có phải là trạng thái 2, đang phun lửa không
+        void Flip() // Hàm này làm quay mặt player lại
         {
-            blockMove = true;// nếu đúng thì sẽ khóa si chuyển lại
-            Invoke("UnlockMove", .5f);// nửa giây sau sẽ mở khóa di chuyển
-        }
-
-        if(scriptHealth1.isDead() || scriptHealth2.isDead())// khi 1 trong 2 player chết thì cả 2 sẽ không thể di chuyển được
-        {
-            blockMove = true;
-        }    
-    }
-
-    void Flip() // Hàm này là việc quay mặt player lại
-    {
-        if ((transform.localScale.x > 0 && moveInput.x > 0) || (transform.localScale.x < 0 && moveInput.x < 0))
-        {
-            Vector3 temp = transform.localScale;
-            temp.x *= -1;
-            transform.localScale = temp;
+            if ((transform.localScale.x > 0 && moveInput.x > 0) || (transform.localScale.x < 0 && moveInput.x < 0))
+            {
+                Vector3 temp = transform.localScale;
+                temp.x *= -1;
+                transform.localScale = temp;
+            }
         }
     }
+
+
 
     void UnlockMove() // Hàm này để mở khóa di chuyển
     {
