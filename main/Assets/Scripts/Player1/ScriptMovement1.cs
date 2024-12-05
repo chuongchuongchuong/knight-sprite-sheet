@@ -10,14 +10,17 @@ public class ScriptMovement1 : MonoBehaviour
     public bool blockMove = false;
 
 
-    private ScriptAnimation1 scriptAnimation;
-    private ScriptCheckGrounded scriptCheckGrounded;
-    private Rigidbody2D rb;
-    private ScriptHealth1 scriptHealth1;
-    private ScriptHealth2 scriptHealth2;
+    [SerializeField] private ScriptAnimation1 scriptAnimation;
+    [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private ScriptHealth1 scriptHealth1;
+    [SerializeField] private ScriptHealth2 scriptHealth2;
 
-    private void Awake()
+    private void Reset()
     {
+        speed = 5;
+        jumpForce = 5;
+
         scriptAnimation = GetComponentInChildren<ScriptAnimation1>();
         scriptCheckGrounded = GetComponentInChildren<ScriptCheckGrounded>();
         rb = GetComponent<Rigidbody2D>();

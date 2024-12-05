@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class ScriptBulletWay : MonoBehaviour
 {
-    public int speed = 10;
-    private Rigidbody2D rb;
-    private Transform transform2;
-    private ScriptHealth1 scriptHealth1;
-    //private ScriptMovement2 scriptMovement2;
-    private int damage = 10;
+    [SerializeField] private int speed = 10;
+    [SerializeField] private int damage = 15;
+
+    [SerializeField] private Transform transform2;
+    [SerializeField] private ScriptHealth1 scriptHealth1;
+   
     public GameObject boom;
-    private void Awake()
+    private void Reset()
     {
-        rb = GetComponent<Rigidbody2D>();
         transform2 = GameObject.Find("Player2: Dragon").transform;
-        scriptHealth1 = GameObject.Find("Player1: knight").GetComponentInChildren<ScriptHealth1>();
-        //scriptMovement2 = transform2.GetComponent<ScriptMovement2>();
+        scriptHealth1 = GameObject.Find("Health1").GetComponent<ScriptHealth1>();
+        boom = Resources.Load<GameObject>("prefabs/explosion_02");
     }
     // Start is called before the first frame update
     void Start()
     {
         if (transform2.localScale.x > 0) GetComponent<SpriteRenderer>().flipX = true;
-        //rb.velocity = Vector2.left * speed * transform2.localScale.x;
     }
     private void Update()
     {
@@ -33,7 +31,7 @@ public class ScriptBulletWay : MonoBehaviour
     {
         if (hitInfo.gameObject.name == "Player1: knight")
         {
-            GameObject temp = Instantiate(boom, transform.position, transform.rotation);
+            GameObject temp = Instantiate(boom, transform.position, Quaternion.identity);
             scriptHealth1.TakeDamage(damage);
 
             Destroy(gameObject);

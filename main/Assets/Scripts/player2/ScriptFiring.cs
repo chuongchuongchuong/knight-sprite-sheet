@@ -7,12 +7,12 @@ public class ScriptFiring : MonoBehaviour
     float coolDownTime = 1f;
     float lastShot;
 
-    public GameObject bullet;
-    private Transform transform2;
+    [SerializeField] public GameObject bulletPrefabs;
+    
 
-    private void Awake()
+    private void Reset()
     {
-        transform2 = transform.parent;
+        bulletPrefabs = Resources.Load<GameObject>("prefabs/fireball_01");
     }
 
     // Update is called once per frame
@@ -20,9 +20,9 @@ public class ScriptFiring : MonoBehaviour
     {
         if (Time.time - lastShot > coolDownTime && /*Input.GetKeyDown(KeyCode.Keypad1)*/Input.GetKeyDown(KeyCode.N))
         {
-            GameObject temp = Instantiate(bullet, transform.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefabs, transform.position, Quaternion.identity);
             lastShot = Time.time;
-            Destroy(temp, .7f);// đạn sẽ chỉ di chuyển được khoảng cách trong 0,7s
+            Destroy(bullet, .7f);// đạn sẽ chỉ di chuyển được khoảng cách trong 0,7s
         }
     }
 

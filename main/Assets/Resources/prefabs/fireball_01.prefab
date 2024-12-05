@@ -125,4 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  damage: 15
+  transform2: {fileID: 0}
+  scriptHealth1: {fileID: 0}
   boom: {fileID: 2901937503389857259, guid: fdd74e8634a75444fba746a91bfa5409, type: 3}

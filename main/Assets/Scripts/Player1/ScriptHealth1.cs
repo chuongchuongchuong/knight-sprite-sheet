@@ -3,33 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class ScriptHealth1 : MonoBehaviour
+public class ScriptHealth1 : ScriptBaseHealth
 {
-    private int maxHealth = 50;
-    private Slider healthBar;
-
-    private void Awake()
+    public override void Reset()
     {
+        base.Reset();
+        maxHealth = 60;
         healthBar = GameObject.Find("HealthBar1").GetComponent<Slider>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        healthBar.maxValue = maxHealth;
-        healthBar.value = maxHealth;
-
-    }
-
-    public void TakeDamage(float damage)
-    {
-        healthBar.value -= damage;
-    }
-
-    public bool isDead()
-    {
-        if (healthBar.value <= 0) return true;
-        else return false;
     }
 }

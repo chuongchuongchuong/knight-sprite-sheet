@@ -5,17 +5,17 @@ using UnityEngine.UI;
 
 public class ScriptAnimation1 : MonoBehaviour
 {
-    private Animator anim;
-    private Rigidbody2D rb;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Rigidbody2D rb;
 
-    private ScriptMovement1 scriptMovement1;
-    private ScriptCheckGrounded scriptCheckGrounded;
-    private ScriptHealth1 scriptHealth1;
+    [SerializeField] private ScriptMovement1 scriptMovement1;
+    [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
+    [SerializeField] private ScriptHealth1 scriptHealth1;
 
     public int state;
     //0: idle, 1:walk, 2: jump, 3: attack, 4: hurt, 
 
-    private void Awake()
+    private void Reset()
     {
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
@@ -95,8 +95,8 @@ public class ScriptAnimation1 : MonoBehaviour
     public void Attack2Idle()
     {
         state = 0;
-        scriptMovement1.blockMove = false;
-        transform.parent.GetComponentInChildren<ScriptSlash>().Slash();
+        scriptMovement1.blockMove = false;// không tấn công nữa thì có thể di chuyển được
+        transform.parent.GetComponentInChildren<ScriptSlash>().Attack();// kích hoạt tấn công
     }
 
 
