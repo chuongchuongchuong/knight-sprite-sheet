@@ -695,6 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a248363cc5e7cd408cf60d87baa1f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 10
   boxCollider: {fileID: 594634142}
   scriptHealth2: {fileID: 1382791816}
   scriptAnimation1: {fileID: 0}
@@ -2168,6 +2169,11 @@ MonoBehaviour:
   moveInput: {x: 0, y: 0}
   blockMove: 0
   isFlyin: 0
+  rb: {fileID: 1485611463}
+  scriptCheckGrounded: {fileID: 1420905777}
+  anim: {fileID: 215580655}
+  scriptHealth1: {fileID: 1532986982}
+  scriptHealth2: {fileID: 1382791816}
 --- !u!1 &1487672860
 GameObject:
   m_ObjectHideFlags: 0
