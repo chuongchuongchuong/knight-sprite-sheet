@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class ScriptAnimation1 : MonoBehaviour
 {
@@ -24,16 +21,9 @@ public class ScriptAnimation1 : MonoBehaviour
         scriptHealth1 = transform.parent.GetComponentInChildren<ScriptHealth1>();
 
         scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
-
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         switch (state)
         {
@@ -48,7 +38,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 }
 
                 break;
-            case 1:// đang chạy
+            case 1: // đang chạy
                 if (scriptMovement1.moveX == 0) state = 0; //đang chạy thành đứng im
                 if (Mathf.Abs(rb.velocity.y) > .1) state = 2; //đang chạy thì nhảy hoặc rơi
 
@@ -56,7 +46,7 @@ public class ScriptAnimation1 : MonoBehaviour
                 {
                     anim.SetTrigger("Attack");
                     state = 3;
-                    scriptMovement1.blockMove = true;// đang chém thì ko di chuyển được
+                    scriptMovement1.blockMove = true; // đang chém thì ko di chuyển được
                 }
 
                 if (Input.GetKeyDown(KeyCode.DownArrow)) // đang chạy ấn xuống là dash
@@ -66,24 +56,20 @@ public class ScriptAnimation1 : MonoBehaviour
                 }
 
 
-
                 break;
 
-            case 2:// đang nhảy
-                if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX == 0) state = 0;// đang rơi thành xuống mặt đất
-                if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX != 0) state = 1;// đang rơi thành chạy
+            case 2: // đang nhảy
+                if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX == 0)
+                    state = 0; // đang rơi thành xuống mặt đất
+                if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX != 0) state = 1; // đang rơi thành chạy
 
                 if (Input.GetKeyDown(KeyCode.J)) // đang nhảy ấn Z là JumpAttack
                     anim.SetTrigger("JumpAttack");
                 break;
-
-            default: break;
-
         }
 
 
-
-        if (scriptHealth1.isDead())// check xem có chết ko
+        if (scriptHealth1.IsDead()) // check xem có chết ko
         {
             state = 12;
             scriptMovement1.blockMove = true;
@@ -95,8 +81,8 @@ public class ScriptAnimation1 : MonoBehaviour
     public void Attack2Idle()
     {
         state = 0;
-        scriptMovement1.blockMove = false;// không tấn công nữa thì có thể di chuyển được
-        transform.parent.GetComponentInChildren<ScriptSlash>().Attack();// kích hoạt tấn công
+        scriptMovement1.blockMove = false; // không tấn công nữa thì có thể di chuyển được
+        transform.parent.GetComponentInChildren<ScriptSlash>().Attack(); // kích hoạt tấn công
     }
 
 
@@ -105,7 +91,6 @@ public class ScriptAnimation1 : MonoBehaviour
     {
         //if (scriptChecknUI.healthBar1.value != 0)
         anim.SetInteger("state", 0);
-
     }
 
 

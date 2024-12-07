@@ -27,8 +27,8 @@ public class ScriptGameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (scriptHealth1.isDead()) Invoke(nameof(DragonWon), 4f);
-        if (scriptHealth2.isDead()) Invoke(nameof(KnightWon), 4f);
+        if (scriptHealth1.IsDead()) Invoke(nameof(DragonWon), 4f);
+        if (scriptHealth2.IsDead()) Invoke(nameof(KnightWon), 4f);
     }
 
     //xuất hiện bảng thông báo dragon thắng

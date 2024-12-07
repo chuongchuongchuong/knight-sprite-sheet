@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScriptBulletWay : MonoBehaviour
@@ -18,20 +16,20 @@ public class ScriptBulletWay : MonoBehaviour
         boom = Resources.Load<GameObject>("prefabs/explosion_02");
     }
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         if (transform2.localScale.x > 0) GetComponent<SpriteRenderer>().flipX = true;
     }
     private void Update()
     {
-        transform.Translate(Vector2.left * speed * transform2.localScale.x * Time.deltaTime);
+        transform.Translate( speed * transform2.localScale.x * Time.deltaTime*Vector2.left);
     }
 
     public void OnCollisionEnter2D(Collision2D hitInfo)
     {
         if (hitInfo.gameObject.name == "Player1: knight")
         {
-            GameObject temp = Instantiate(boom, transform.position, Quaternion.identity);
+            var temp = Instantiate(boom, transform.position, Quaternion.identity);
             scriptHealth1.TakeDamage(damage);
 
             Destroy(gameObject);

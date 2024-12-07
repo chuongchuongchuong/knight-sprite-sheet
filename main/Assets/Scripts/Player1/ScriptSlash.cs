@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScriptSlash : MonoBehaviour
 {
-    int damage = 10;
+    [SerializeField] private int damage = 10;
 
     [SerializeField] private BoxCollider2D boxCollider;
     [SerializeField] private ScriptHealth2 scriptHealth2;
@@ -22,11 +20,11 @@ public class ScriptSlash : MonoBehaviour
         boxCollider.enabled = false;
     }
 
-    public void Slash()
+    private void Slash()
     {
         boxCollider.enabled = true;
     }
-    public void UnSlash()
+    private void UnSlash()
     {
         boxCollider.enabled = false;
     }
@@ -37,19 +35,13 @@ public class ScriptSlash : MonoBehaviour
         Invoke(nameof(UnSlash), .5f); // tắt vùng tấn công đi
 
     }
-    private void Update()
-    {
-
-    }
-
-    // Update is called once per frame
+    
     public void OnCollisionEnter2D(Collision2D hitInfo)
     {
         if (hitInfo.gameObject.name == "Player2: Dragon")
         {
             scriptHealth2.TakeDamage(damage);
         }
-
     }
 
 }

@@ -1,22 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScriptMovement2 : MonoBehaviour
 {
-    public int speed;
-    public int jumpForce;
+    [SerializeField] private int speed = 5;
+    [SerializeField] private int jumpForce = 5;
     public Vector2 moveInput;
-    public bool blockMove = false;
-    public bool isFlyin = false;
+    public bool blockMove;
+    [SerializeField] private bool isFlyin;
 
-    private Rigidbody2D rb;
-    private ScriptCheckGrounded scriptCheckGrounded;
-    private Animator anim;
-    private ScriptHealth1 scriptHealth1;
-    private ScriptHealth2 scriptHealth2;
+    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
+    [SerializeField] private Animator anim;
+    [SerializeField] private ScriptHealth1 scriptHealth1;
+    [SerializeField] private ScriptHealth2 scriptHealth2;
 
-    private void Awake()
+    private void Reset()
     {
         rb = GetComponent<Rigidbody2D>();
         scriptCheckGrounded = GetComponentInChildren<ScriptCheckGrounded>();
@@ -24,26 +22,24 @@ public class ScriptMovement2 : MonoBehaviour
         scriptHealth1 = GameObject.Find("Health1").GetComponent<ScriptHealth1>(); // lấy component máu của cả 2 player
         scriptHealth2 = GameObject.Find("Health2").GetComponent<ScriptHealth2>();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (blockMove) return;// nếu bị khóa di chuyển thì không di chuyển được
+        if (blockMove) return; // nếu bị khóa di chuyển thì không di chuyển được
 
         MovenJump();
 
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("2_BreathFire"))// đây là lệnh check xem có phải là trạng thái 2, đang phun lửa không
+        if (anim.GetCurrentAnimatorStateInfo(0)
+            .IsName("2_BreathFire")) // đây là lệnh check xem có phải là trạng thái 2, đang phun lửa không
         {
-            blockMove = true;// nếu đúng thì sẽ khóa si chuyển lại
-            Invoke(nameof(UnlockMove), .5f);// nửa giây sau sẽ mở khóa di chuyển
+            blockMove = true; // nếu đúng thì sẽ khóa si chuyển lại
+            Invoke(nameof(UnlockMove), .5f); // nửa giây sau sẽ mở khóa di chuyển
         }
 
-        if (scriptHealth1.isDead() || scriptHealth2.isDead())// khi 1 trong 2 player chết thì cả 2 sẽ không thể di chuyển được
+        if (scriptHealth1.IsDead() ||
+            scriptHealth2.IsDead()) // khi 1 trong 2 player chết thì cả 2 sẽ không thể di chuyển được
         {
             blockMove = true;
         }
@@ -53,17 +49,18 @@ public class ScriptMovement2 : MonoBehaviour
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
         if (isFlyin) moveInput.y = Input.GetAxisRaw("Vertical");
-        transform.Translate(moveInput * speed * Time.deltaTime);// Di chuyển trái phải
+        transform.Translate(speed * Time.deltaTime * moveInput); // Di chuyển trái phải
         Flip(); // qQay mặt nhân vật
 
-        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.UpArrow))// chỗ này là code nhảy lên
+        if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.UpArrow)) // chỗ này là code nhảy lên
             rb.velocity = Vector2.up * jumpForce;
+        return;
 
         void Flip() // Hàm này làm quay mặt player lại
         {
             if ((transform.localScale.x > 0 && moveInput.x > 0) || (transform.localScale.x < 0 && moveInput.x < 0))
             {
-                Vector3 temp = transform.localScale;
+                var temp = transform.localScale;
                 temp.x *= -1;
                 transform.localScale = temp;
             }
@@ -71,8 +68,7 @@ public class ScriptMovement2 : MonoBehaviour
     }
 
 
-
-    void UnlockMove() // Hàm này để mở khóa di chuyển
+    private void UnlockMove() // Hàm này để mở khóa di chuyển
     {
         blockMove = false;
     }
