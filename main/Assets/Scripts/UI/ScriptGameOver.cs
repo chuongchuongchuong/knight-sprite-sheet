@@ -5,30 +5,30 @@ using UnityEngine.UI;
 
 public class ScriptGameOver : MonoBehaviour
 {
-    private GameObject gameOver;
-    private ScriptHealth1 scriptHealth1;
-    private ScriptHealth2 scriptHealth2;
+    [SerializeField] private GameObject gameOver;
+    [SerializeField] private ScriptKnightHealth scriptKnightHealth;
+    [SerializeField] private ScriptDragonHealth scriptDragonHealth;
     // Start is called before the first frame update
 
-    private void Awake()
+    private void Reset()
     {
         gameOver = GameObject.Find("GameOver");
-        scriptHealth1 = GameObject.Find("Health1").GetComponent<ScriptHealth1>(); // lấy component máu của cả 2 player
-        scriptHealth2 = GameObject.Find("Health2").GetComponent<ScriptHealth2>();
+        scriptKnightHealth = GameObject.Find("KnightHealth").GetComponent<ScriptKnightHealth>(); // lấy component máu của cả 2 player
+        scriptDragonHealth = GameObject.Find("DragonHealth").GetComponent<ScriptDragonHealth>();
 
         gameOver.GetComponentInChildren<Button>().onClick.AddListener(PlayAgain);// Onclick cái nút PlayAgain
     }
-    void Start()
+    private void Start()
     {
-        gameOver.SetActive(false);// tắt csai UI panel cuối game đi
+        gameOver.SetActive(false);// tắt cái UI panel cuối game đi
 
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (scriptHealth1.IsDead()) Invoke(nameof(DragonWon), 4f);
-        if (scriptHealth2.IsDead()) Invoke(nameof(KnightWon), 4f);
+        if (scriptKnightHealth.IsDead()) Invoke(nameof(DragonWon), 4f);
+        if (scriptDragonHealth.IsDead()) Invoke(nameof(KnightWon), 4f);
     }
 
     //xuất hiện bảng thông báo dragon thắng

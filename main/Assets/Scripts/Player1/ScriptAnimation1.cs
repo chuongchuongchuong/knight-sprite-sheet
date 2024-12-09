@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScriptAnimation1 : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class ScriptAnimation1 : MonoBehaviour
 
     [SerializeField] private ScriptMovement1 scriptMovement1;
     [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
-    [SerializeField] private ScriptHealth1 scriptHealth1;
+    [FormerlySerializedAs("scriptKnihgtHealth")] [FormerlySerializedAs("scriptHealth1")] [SerializeField] private ScriptKnightHealth scriptKnightHealth;
 
     public int state;
     //0: idle, 1:walk, 2: jump, 3: attack, 4: hurt, 
@@ -18,7 +19,7 @@ public class ScriptAnimation1 : MonoBehaviour
         rb = GetComponentInParent<Rigidbody2D>();
 
         scriptMovement1 = GetComponentInParent<ScriptMovement1>();
-        scriptHealth1 = transform.parent.GetComponentInChildren<ScriptHealth1>();
+        scriptKnightHealth = transform.parent.GetComponentInChildren<ScriptKnightHealth>();
 
         scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
     }
@@ -69,7 +70,7 @@ public class ScriptAnimation1 : MonoBehaviour
         }
 
 
-        if (scriptHealth1.IsDead()) // check xem có chết ko
+        if (scriptKnightHealth.IsDead()) // check xem có chết ko
         {
             state = 12;
             scriptMovement1.blockMove = true;

@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+
 
 public class ScriptBaseHealth : MonoBehaviour
 {
-    [SerializeField] protected int maxHealth;
+    [SerializeField] protected CharactorData charactorData;
     [SerializeField] protected Slider healthBar;
     [SerializeField] protected GameObject healthPopup;
 
@@ -13,8 +15,8 @@ public class ScriptBaseHealth : MonoBehaviour
     }
     private void Start()
     {
-        healthBar.maxValue = maxHealth;
-        healthBar.value = maxHealth;
+        healthBar.maxValue = charactorData.maxHealth;
+        healthBar.value = charactorData.maxHealth;
     }
 
     public void TakeDamage(int damage) // nhận sát thương

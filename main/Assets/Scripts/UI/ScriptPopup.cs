@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
@@ -12,12 +10,14 @@ public class ScriptPopup : MonoBehaviour
     {
         popup = GetComponent<RectTransform>();
     }
-    void Start()
+
+    private void Start()
     {
         popup.DOAnchorPosY(3, .5f).SetEase(Ease.OutBounce); // chỗ này là text máu sẽ nổi lên
-        popup.GetComponent<Text>().DOFade(0, 1.5f);/*.OnComplete(()
-            => { Destroy(gameObject); });*/
+        popup.GetComponent<Text>().DOFade(0, 1.5f).OnComplete(()
+            =>
+        {
+            Destroy(gameObject);
+        });
     }
-
-
 }

@@ -1,26 +1,28 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScriptMovement2 : MonoBehaviour
 {
-    [SerializeField] private int speed = 5;
-    [SerializeField] private int jumpForce = 5;
-    public Vector2 moveInput;
+    [SerializeField] private CharactorData dragonData;
+    
+    [HideInInspector] public Vector2 moveInput;
     public bool blockMove;
     [SerializeField] private bool isFlyin;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
     [SerializeField] private Animator anim;
-    [SerializeField] private ScriptHealth1 scriptHealth1;
-    [SerializeField] private ScriptHealth2 scriptHealth2;
+    [FormerlySerializedAs("scriptKnihgtHealth")] [FormerlySerializedAs("scriptHealth1")] [SerializeField] private ScriptKnightHealth scriptKnightHealth;
+    [FormerlySerializedAs("scriptHealth2")] [SerializeField] private ScriptDragonHealth scriptDragonHealth;
 
     private void Reset()
     {
+        dragonData = Resources.Load<CharactorData>("Data/Dragon");
         rb = GetComponent<Rigidbody2D>();
         scriptCheckGrounded = GetComponentInChildren<ScriptCheckGrounded>();
         anim = GetComponentInChildren<Animator>();
-        scriptHealth1 = GameObject.Find("Health1").GetComponent<ScriptHealth1>(); // lấy component máu của cả 2 player
-        scriptHealth2 = GameObject.Find("Health2").GetComponent<ScriptHealth2>();
+        scriptKnightHealth = GameObject.Find("Health1").GetComponent<ScriptKnightHealth>(); // lấy component máu của cả 2 player
+        scriptDragonHealth = GameObject.Find("Health2").GetComponent<ScriptDragonHealth>();
     }
 
 
@@ -38,8 +40,8 @@ public class ScriptMovement2 : MonoBehaviour
             Invoke(nameof(UnlockMove), .5f); // nửa giây sau sẽ mở khóa di chuyển
         }
 
-        if (scriptHealth1.IsDead() ||
-            scriptHealth2.IsDead()) // khi 1 trong 2 player chết thì cả 2 sẽ không thể di chuyển được
+        if (scriptKnightHealth.IsDead() ||
+            scriptDragonHealth.IsDead()) // khi 1 trong 2 player chết thì cả 2 sẽ không thể di chuyển được
         {
             blockMove = true;
         }
@@ -49,11 +51,11 @@ public class ScriptMovement2 : MonoBehaviour
     {
         moveInput.x = Input.GetAxisRaw("Horizontal");
         if (isFlyin) moveInput.y = Input.GetAxisRaw("Vertical");
-        transform.Translate(speed * Time.deltaTime * moveInput); // Di chuyển trái phải
+        transform.Translate(dragonData.moveSpeed * Time.deltaTime * moveInput); // Di chuyển trái phải
         Flip(); // qQay mặt nhân vật
 
         if (scriptCheckGrounded.isGrounded && Input.GetKeyDown(KeyCode.UpArrow)) // chỗ này là code nhảy lên
-            rb.velocity = Vector2.up * jumpForce;
+            rb.velocity = Vector2.up * dragonData.jumpForce;
         return;
 
         void Flip() // Hàm này làm quay mặt player lại

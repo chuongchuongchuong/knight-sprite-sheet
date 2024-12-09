@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScriptHealth2 : ScriptBaseHealth
+public class ScriptDragonHealth : ScriptBaseHealth
 {
     public override void Reset()
     {
         base.Reset();
-        maxHealth = 50;
+        charactorData=Resources.Load<CharactorData>("HealthOfDragon");
         healthBar = GameObject.Find("HealthBar2").GetComponent<Slider>();
     }
 }

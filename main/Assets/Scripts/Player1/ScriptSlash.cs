@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ScriptSlash : MonoBehaviour
 {
     [SerializeField] private int damage = 10;
 
     [SerializeField] private BoxCollider2D boxCollider;
-    [SerializeField] private ScriptHealth2 scriptHealth2;
+    [FormerlySerializedAs("scriptHealth2")] [SerializeField] private ScriptDragonHealth scriptDragonHealth;
     [SerializeField] private ScriptAnimation1 scriptAnimation1;
 
     private void Reset()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-        scriptHealth2 = GameObject.Find("Player2: Dragon").GetComponentInChildren<ScriptHealth2>();
+        scriptDragonHealth = GameObject.Find("Player2: Dragon").GetComponentInChildren<ScriptDragonHealth>();
         //scriptAnimation1 = transform.parent.GetComponentInChildren<ScriptAnimation1>();
     }
 
@@ -40,7 +41,7 @@ public class ScriptSlash : MonoBehaviour
     {
         if (hitInfo.gameObject.name == "Player2: Dragon")
         {
-            scriptHealth2.TakeDamage(damage);
+            scriptDragonHealth.TakeDamage(damage);
         }
     }
 

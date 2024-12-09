@@ -171,6 +171,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1792bfbbad3eb1c4a873dd0dd466d2e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 2043969796}
+  scriptKnightHealth: {fileID: 1532986982}
+  scriptDragonHealth: {fileID: 1382791816}
 --- !u!1 &189621078
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   boxCollider: {fileID: 594634142}
-  scriptHealth2: {fileID: 1382791816}
+  scriptDragonHealth: {fileID: 1382791816}
   scriptAnimation1: {fileID: 0}
 --- !u!61 &594634142
 BoxCollider2D:
@@ -1667,7 +1670,7 @@ GameObject:
   - component: {fileID: 1382791815}
   - component: {fileID: 1382791816}
   m_Layer: 0
-  m_Name: Health2
+  m_Name: DragonHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1700,7 +1703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c6291239737374da24522365205364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 50
+  charactorData: {fileID: 11400000, guid: f9a94072d17fb3d428dba481cf8b378a, type: 2}
   healthBar: {fileID: 1215907417}
   healthPopup: {fileID: 7290340803334434388, guid: 884b47c4448b38646b6b003534cb645a, type: 3}
 --- !u!1 &1387438592
@@ -1730,7 +1733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1387438592}
   m_LocalRotation: {x: -0, y: -0, z: 0.000114692724, w: 1}
-  m_LocalPosition: {x: -11.73, y: 0.72731197, z: -9.947328}
+  m_LocalPosition: {x: -11.73, y: 0.72731197, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1753,15 +1756,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e5fe566fef1cc4394c3a8002434ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 5
+  knightData: {fileID: 11400000, guid: 3a64e06edc5dd9945b947bd6cb1d2d6e, type: 2}
   moveX: 0
   blockMove: 0
   scriptAnimation: {fileID: 2052283516}
   scriptCheckGrounded: {fileID: 1459264463}
   rb: {fileID: 1387438596}
-  scriptHealth1: {fileID: 1532986982}
-  scriptHealth2: {fileID: 1382791816}
+  scriptKnightHealth: {fileID: 1532986982}
+  scriptDragonHealth: {fileID: 1382791816}
 --- !u!50 &1387438596
 Rigidbody2D:
   serializedVersion: 4
@@ -1910,14 +1912,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420905774}
-  m_LocalRotation: {x: 0.0000007698987, y: -0.006712707, z: 0.00011469014, w: 0.99997747}
+  m_LocalRotation: {x: 0, y: -0.0067107407, z: 0, w: 0.99997747}
   m_LocalPosition: {x: -0.11, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1485611461}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -0.769, z: 0}
 --- !u!61 &1420905776
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2021,7 +2023,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1459264461}
   m_LocalRotation: {x: -0, y: -0.006712707, z: -0, w: 0.99997747}
-  m_LocalPosition: {x: 0.09000044, y: -0.8177771, z: 9.947328}
+  m_LocalPosition: {x: 0.09000044, y: -0.8177771, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2164,16 +2166,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8e6bcd18615124c82950ea58a57518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpForce: 5
+  dragonData: {fileID: 11400000, guid: f9a94072d17fb3d428dba481cf8b378a, type: 2}
   moveInput: {x: 0, y: 0}
   blockMove: 0
   isFlyin: 0
   rb: {fileID: 1485611463}
   scriptCheckGrounded: {fileID: 1420905777}
   anim: {fileID: 215580655}
-  scriptHealth1: {fileID: 1532986982}
-  scriptHealth2: {fileID: 1382791816}
+  scriptKnightHealth: {fileID: 1532986982}
+  scriptDragonHealth: {fileID: 1382791816}
 --- !u!1 &1487672860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,7 +2254,7 @@ GameObject:
   - component: {fileID: 1532986981}
   - component: {fileID: 1532986982}
   m_Layer: 0
-  m_Name: Health1
+  m_Name: KnightHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2286,7 +2287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285759ee1e7e8914a98dd1e2e45efde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
+  charactorData: {fileID: 11400000, guid: 3a64e06edc5dd9945b947bd6cb1d2d6e, type: 2}
   healthBar: {fileID: 204877147}
   healthPopup: {fileID: 7290340803334434388, guid: 884b47c4448b38646b6b003534cb645a, type: 3}
 --- !u!1 &1734744267
@@ -2853,7 +2854,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2052283503}
   m_LocalRotation: {x: -0, y: -0.006712707, z: -0, w: 0.99997747}
-  m_LocalPosition: {x: -0.05, y: 0.18222296, z: 9.947328}
+  m_LocalPosition: {x: -0.05, y: 0.18222296, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2876,5 +2877,5 @@ MonoBehaviour:
   rb: {fileID: 1387438596}
   scriptMovement1: {fileID: 1387438595}
   scriptCheckGrounded: {fileID: 1459264463}
-  scriptHealth1: {fileID: 1532986982}
+  scriptKnightHealth: {fileID: 1532986982}
   state: 0
