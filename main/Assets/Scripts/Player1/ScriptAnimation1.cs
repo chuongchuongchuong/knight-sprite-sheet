@@ -6,9 +6,9 @@ public class ScriptAnimation1 : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Rigidbody2D rb;
 
-    [SerializeField] private ScriptMovement1 scriptMovement1;
+    
     [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
-    [FormerlySerializedAs("scriptKnihgtHealth")] [FormerlySerializedAs("scriptHealth1")] [SerializeField] private ScriptKnightHealth scriptKnightHealth;
+    
 
     public int state;
     //0: idle, 1:walk, 2: jump, 3: attack, 4: hurt, 
@@ -18,9 +18,6 @@ public class ScriptAnimation1 : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
 
-        scriptMovement1 = GetComponentInParent<ScriptMovement1>();
-        scriptKnightHealth = transform.parent.GetComponentInChildren<ScriptKnightHealth>();
-
         scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
     }
     
@@ -29,25 +26,25 @@ public class ScriptAnimation1 : MonoBehaviour
         switch (state)
         {
             case 0:
-                if (scriptMovement1.moveX != 0) state = 1; //đang đứng im thành chạy
+                if (ScriptKnightMovement.Instance.moveX != 0) state = 1; //đang đứng im thành chạy
                 if (Mathf.Abs(rb.velocity.y) > .1) state = 2; // đang đứng im thì nhảy
                 if (Input.GetKeyDown(KeyCode.J)) // đang đứng, ấm a là đánh
                 {
                     anim.SetTrigger("Attack");
                     state = 3;
-                    scriptMovement1.blockMove = true; // đang chém thì ko di chuyển được
+                    ScriptKnightMovement.Instance.blockMove = true; // đang chém thì ko di chuyển được
                 }
 
                 break;
             case 1: // đang chạy
-                if (scriptMovement1.moveX == 0) state = 0; //đang chạy thành đứng im
+                if (ScriptKnightMovement.Instance.moveX == 0) state = 0; //đang chạy thành đứng im
                 if (Mathf.Abs(rb.velocity.y) > .1) state = 2; //đang chạy thì nhảy hoặc rơi
 
                 if (Input.GetKeyDown(KeyCode.J)) // đang chạy ấn Z là đánh
                 {
                     anim.SetTrigger("Attack");
                     state = 3;
-                    scriptMovement1.blockMove = true; // đang chém thì ko di chuyển được
+                    ScriptKnightMovement.Instance.blockMove = true; // đang chém thì ko di chuyển được
                 }
 
                 if (Input.GetKeyDown(KeyCode.DownArrow)) // đang chạy ấn xuống là dash
@@ -60,9 +57,9 @@ public class ScriptAnimation1 : MonoBehaviour
                 break;
 
             case 2: // đang nhảy
-                if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX == 0)
+                if (scriptCheckGrounded.isGrounded && ScriptKnightMovement.Instance.moveX == 0)
                     state = 0; // đang rơi thành xuống mặt đất
-                if (scriptCheckGrounded.isGrounded && scriptMovement1.moveX != 0) state = 1; // đang rơi thành chạy
+                if (scriptCheckGrounded.isGrounded && ScriptKnightMovement.Instance.moveX != 0) state = 1; // đang rơi thành chạy
 
                 if (Input.GetKeyDown(KeyCode.J)) // đang nhảy ấn Z là JumpAttack
                     anim.SetTrigger("JumpAttack");
@@ -70,10 +67,10 @@ public class ScriptAnimation1 : MonoBehaviour
         }
 
 
-        if (scriptKnightHealth.IsDead()) // check xem có chết ko
+        if (KnightHealth.Instance.IsDead()) // check xem có chết ko
         {
             state = 12;
-            scriptMovement1.blockMove = true;
+            ScriptKnightMovement.Instance.blockMove = true;
         }
 
         anim.SetInteger("state", state);
@@ -82,7 +79,7 @@ public class ScriptAnimation1 : MonoBehaviour
     public void Attack2Idle()
     {
         state = 0;
-        scriptMovement1.blockMove = false; // không tấn công nữa thì có thể di chuyển được
+        ScriptKnightMovement.Instance.blockMove = false; // không tấn công nữa thì có thể di chuyển được
         transform.parent.GetComponentInChildren<ScriptSlash>().Attack(); // kích hoạt tấn công
     }
 
@@ -97,6 +94,6 @@ public class ScriptAnimation1 : MonoBehaviour
 
     public void UnlockMove()
     {
-        scriptMovement1.blockMove = false;
+        ScriptKnightMovement.Instance.blockMove = false;
     }
 }

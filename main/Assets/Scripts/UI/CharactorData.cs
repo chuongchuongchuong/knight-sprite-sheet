@@ -9,3 +9,4 @@ public class CharactorData : ScriptableObject
     public int jumpForce;
 }
 
+

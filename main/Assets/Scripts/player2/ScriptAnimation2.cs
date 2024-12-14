@@ -8,11 +8,11 @@ public class ScriptAnimation2 : MonoBehaviour
     //0:Idle, 1:Run
 
     private Animator anim;
-    private ScriptMovement2 ScriptMovement2;
+    private ScriptDragonMovement scriptDragonMovement;
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        ScriptMovement2 = GetComponentInParent<ScriptMovement2>();
+        scriptDragonMovement = GetComponentInParent<ScriptDragonMovement>();
     }
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class ScriptAnimation2 : MonoBehaviour
         switch (state)
         {
             case 0:
-                if (ScriptMovement2.moveInput.x != 0) state = 1;// đang đứng yên thành walk
+                if (scriptDragonMovement.moveX != 0) state = 1;// đang đứng yên thành walk
                 if (Input.GetKeyDown(KeyCode.N))
                 {
                     anim.SetTrigger("Breathefire");
@@ -40,7 +40,7 @@ public class ScriptAnimation2 : MonoBehaviour
 
                 break;
             case 1:
-                if (ScriptMovement2.moveInput.x == 0) state = 0;// đang chạy thành đứng yên
+                if (scriptDragonMovement.moveX == 0) state = 0;// đang chạy thành đứng yên
                 if (Input.GetKeyDown(KeyCode.N))
                 {
                     anim.SetTrigger("Breathefire");

@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 2043969796}
-  scriptKnightHealth: {fileID: 1532986982}
-  scriptDragonHealth: {fileID: 1382791816}
+  knightHealth: {fileID: 0}
+  dragonHealth: {fileID: 0}
 --- !u!1 &189621078
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,7 +700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   boxCollider: {fileID: 594634142}
-  scriptDragonHealth: {fileID: 1382791816}
+  dragonHealth: {fileID: 0}
   scriptAnimation1: {fileID: 0}
 --- !u!61 &594634142
 BoxCollider2D:
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactorData: {fileID: 11400000, guid: f9a94072d17fb3d428dba481cf8b378a, type: 2}
   healthBar: {fileID: 1215907417}
-  healthPopup: {fileID: 7290340803334434388, guid: 884b47c4448b38646b6b003534cb645a, type: 3}
+  loseHealthPopup: {fileID: 0}
 --- !u!1 &1387438592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,7 +1715,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1387438593}
-  - component: {fileID: 1387438595}
   - component: {fileID: 1387438597}
   - component: {fileID: 1387438596}
   m_Layer: 0
@@ -1741,29 +1740,10 @@ Transform:
   - {fileID: 1459264462}
   - {fileID: 594634140}
   - {fileID: 1532986981}
+  - {fileID: 1390459620}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.013}
---- !u!114 &1387438595
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1387438592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02e5fe566fef1cc4394c3a8002434ee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knightData: {fileID: 11400000, guid: 3a64e06edc5dd9945b947bd6cb1d2d6e, type: 2}
-  moveX: 0
-  blockMove: 0
-  scriptAnimation: {fileID: 2052283516}
-  scriptCheckGrounded: {fileID: 1459264463}
-  rb: {fileID: 1387438596}
-  scriptKnightHealth: {fileID: 1532986982}
-  scriptDragonHealth: {fileID: 1382791816}
 --- !u!50 &1387438596
 Rigidbody2D:
   serializedVersion: 4
@@ -1811,6 +1791,57 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7667726, y: 1.2332308}
   m_EdgeRadius: 0
+--- !u!1 &1390459619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1390459620}
+  - component: {fileID: 1390459621}
+  m_Layer: 0
+  m_Name: Movement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1390459620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390459619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1387438593}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1390459621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390459619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e5fe566fef1cc4394c3a8002434ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knightData: {fileID: 11400000, guid: 3a64e06edc5dd9945b947bd6cb1d2d6e, type: 2}
+  blockMove: 0
+  scriptAnimation: {fileID: 2052283516}
+  scriptCheckGrounded: {fileID: 1459264463}
+  rb: {fileID: 1387438596}
+  knightHealth: {fileID: 0}
+  dragonHealth: {fileID: 0}
 --- !u!1 &1399353037
 GameObject:
   m_ObjectHideFlags: 0
@@ -2173,8 +2204,8 @@ MonoBehaviour:
   rb: {fileID: 1485611463}
   scriptCheckGrounded: {fileID: 1420905777}
   anim: {fileID: 215580655}
-  scriptKnightHealth: {fileID: 1532986982}
-  scriptDragonHealth: {fileID: 1382791816}
+  knightHealth: {fileID: 0}
+  dragonHealth: {fileID: 0}
 --- !u!1 &1487672860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,7 +2320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charactorData: {fileID: 11400000, guid: 3a64e06edc5dd9945b947bd6cb1d2d6e, type: 2}
   healthBar: {fileID: 204877147}
-  healthPopup: {fileID: 7290340803334434388, guid: 884b47c4448b38646b6b003534cb645a, type: 3}
+  loseHealthPopup: {fileID: 0}
 --- !u!1 &1734744267
 GameObject:
   m_ObjectHideFlags: 0
@@ -2875,7 +2906,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 2052283509}
   rb: {fileID: 1387438596}
-  scriptMovement1: {fileID: 1387438595}
+  scriptMovement1: {fileID: 0}
   scriptCheckGrounded: {fileID: 1459264463}
-  scriptKnightHealth: {fileID: 1532986982}
+  knightHealth: {fileID: 0}
   state: 0
