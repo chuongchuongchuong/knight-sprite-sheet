@@ -7,13 +7,11 @@ public class ScriptBulletWay : MonoBehaviour
     [SerializeField] private int damage = 15;
 
     [SerializeField] private Transform transform2;
-    [SerializeField] private KnightHealth knightHealth;
    
     public GameObject boom;
-    private void Reset()
+    private void Awake()
     {
         transform2 = GameObject.Find("Player2: Dragon").transform;
-        knightHealth = GameObject.Find("KnightHealth").GetComponent<KnightHealth>();
         boom = Resources.Load<GameObject>("prefabs/explosion_02");
     }
     // Start is called before the first frame update
@@ -31,7 +29,7 @@ public class ScriptBulletWay : MonoBehaviour
         if (hitInfo.gameObject.name == "Player1: knight")
         {
             var temp = Instantiate(boom, transform.position, Quaternion.identity);
-            knightHealth.TakeDamage(damage);
+            KnightHealth.Instance.TakeDamage(damage);
 
             Destroy(gameObject);
             Destroy(temp, .7f);

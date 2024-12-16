@@ -7,6 +7,9 @@ public class CharactorData : ScriptableObject
     public int maxHealth;
     public int moveSpeed;
     public int jumpForce;
+    
+    public KeyMap keyMap = new();
+    
 }
 
 

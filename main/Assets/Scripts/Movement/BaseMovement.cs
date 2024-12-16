@@ -18,7 +18,7 @@ public class BaseMovement<T> : ChuongMono<T> where T : BaseMovement<T>
     protected override void LoadComponent()
     {
         rb = transform.parent.GetComponent<Rigidbody2D>();
-        animator = transform.parent.GetComponent<Animator>();
+        animator = transform.parent.GetComponentInChildren<Animator>();
     }
 
     protected override void GetScriptableDataValue()
@@ -45,16 +45,11 @@ public class BaseMovement<T> : ChuongMono<T> where T : BaseMovement<T>
         void Flip()
         {
             if (transform.parent.localScale.x * moveX >= 0) return;
-            var temp = transform.localScale;
+            var temp = transform.parent.localScale;
             temp.x *= -1;
-            transform.localScale = temp;
+            transform.parent.localScale = temp;
         }
     }
 
-    protected virtual void Jump()
-    {
-        if (!Input.GetKeyDown(KeyCode.W)) return;
-        if (!isGrounded) return;
-        rb.velocity = Vector2.up * _jumpForce;
-    }
+    protected virtual void Jump(){}
 }

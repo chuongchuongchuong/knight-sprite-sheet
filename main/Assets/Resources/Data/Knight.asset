@@ -15,3 +15,12 @@ MonoBehaviour:
   maxHealth: 60
   moveSpeed: 5
   jumpForce: 7
+  keyMap:
+    keyMap_MoveX: Horizontal2
+    input_MoveX: 0
+    keyMap_MoveY: 
+    input_MoveY: 0
+    keyMap_AttackButton: 106
+    input_Attack: 0
+    keyMap_JumpButton: 119
+    intput_Jump: 0

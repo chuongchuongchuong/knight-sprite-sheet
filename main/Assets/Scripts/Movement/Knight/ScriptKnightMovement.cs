@@ -4,27 +4,24 @@ using UnityEngine.Serialization;
 
 public class ScriptKnightMovement : BaseMovement<ScriptKnightMovement>
 {
-    [SerializeField] private ScriptAnimation1 scriptAnimation;
-    [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
-
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        scriptAnimation = transform.parent.GetComponentInChildren<ScriptAnimation1>();
-        scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
-    }
-
     protected override void GetScriptableDataValue()
     {
-        var takeData = Resources.Load<CharactorData>("Data/Knight");
+        takeData = Resources.Load<CharactorData>("Data/Knight");
         base.GetScriptableDataValue();
     }
-
-
+    
     protected override void Move()
     {
-        moveX = Input.GetAxisRaw("Horizontal2");
+        moveX = InputManagement.Instance.knightKeyMap.input_MoveX;
         base.Move();
+    }
+    
+    protected override void Jump()
+    {
+        if (!InputManagement.Instance.knightKeyMap.intput_Jump) return;
+        isGrounded = ScriptCheckKnightGrounded.Instance.isGrounded;
+        if (!isGrounded) return;
+        rb.velocity = Vector2.up * _jumpForce;
     }
 
     protected override void Update()
@@ -36,7 +33,7 @@ public class ScriptKnightMovement : BaseMovement<ScriptKnightMovement>
     private void Dash()
     {
         if (!Input.GetKeyDown(KeyCode.DownArrow)) return;
-        if (scriptAnimation.state != 1) return;
+        if (ScriptKnightAnimation.Instance.state != 1) return;
         rb.velocity = (float)_jumpForce * 2 / 3 * new Vector2(moveX, 0);
     }
 }

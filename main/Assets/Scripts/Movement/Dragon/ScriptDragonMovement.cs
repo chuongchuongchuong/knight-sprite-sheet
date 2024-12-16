@@ -1,17 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ScriptDragonMovement : BaseMovement<ScriptDragonMovement>
 {
     protected bool canFly;
-    [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
-    
-    protected override void LoadComponent()
-    {
-        base.LoadComponent();
-        //scriptAnimation = transform.parent.GetComponentInChildren<ScriptAnimation1>();
-        scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
-    }
 
     protected override void GetScriptableDataValue()
     {
@@ -21,13 +12,21 @@ public class ScriptDragonMovement : BaseMovement<ScriptDragonMovement>
     
     protected override void Move()
     {
-        moveX = Input.GetAxisRaw("Horizontal");
+        moveX = InputManagement.Instance.dragonKeyMap.input_MoveX;
+        moveY = InputManagement.Instance.dragonKeyMap.input_MoveY;
         if (canFly) moveY = Input.GetAxisRaw("Vertical");
         base.Move();
     }
 
+    protected override void Jump()
+    {
+        if (!InputManagement.Instance.dragonKeyMap.intput_Jump) return;
+        isGrounded = ScriptCheckDragonGrounded.Instance.isGrounded;
+        if (!isGrounded) return;
+        rb.velocity = Vector2.up * _jumpForce;
+    }
 
-    
+
     /*private void Update()
     {
         if (blockMove) return; // nếu bị khóa di chuyển thì không di chuyển được

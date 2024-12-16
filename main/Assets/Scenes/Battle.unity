@@ -172,8 +172,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: {fileID: 2043969796}
-  knightHealth: {fileID: 0}
-  dragonHealth: {fileID: 0}
+  knightHealth: {fileID: 1532986982}
+  dragonHealth: {fileID: 1382791816}
 --- !u!1 &189621078
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 20daa800a641d9e4cae18a06630db1ef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 5.12, y: 2.56}
@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  anim: {fileID: 215580655}
 --- !u!1 &329419717
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,6 +499,60 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &399493503
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399493504}
+  - component: {fileID: 399493505}
+  m_Layer: 0
+  m_Name: InputManagement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399493504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399493503}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0511, y: -3.08, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &399493505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399493503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a74c43127d30d0c4d94028e8eaa3b236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knightKeyMap:
+    axisMoveX: 
+    axisMoveY: 
+    attackButton: 0
+    jumpButton: 0
+  dragonKeyMap:
+    axisMoveX: 
+    axisMoveY: 
+    attackButton: 0
+    jumpButton: 0
 --- !u!1 &404279758
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,8 +755,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   boxCollider: {fileID: 594634142}
-  dragonHealth: {fileID: 0}
-  scriptAnimation1: {fileID: 0}
 --- !u!61 &594634142
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -715,7 +768,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.17740221, y: 0}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -726,7 +779,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0425807, y: 1}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!1 &681636370
 GameObject:
@@ -1703,9 +1756,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c6291239737374da24522365205364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactorData: {fileID: 11400000, guid: f9a94072d17fb3d428dba481cf8b378a, type: 2}
   healthBar: {fileID: 1215907417}
-  loseHealthPopup: {fileID: 0}
+  loseHealthPopup: {fileID: 7290340803334434388, guid: 884b47c4448b38646b6b003534cb645a, type: 3}
+  healHealthPopup: {fileID: 0}
 --- !u!1 &1387438592
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,7 +1831,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029149815, y: -0.36928022}
+  m_Offset: {x: 0.027672403, y: -0.36928022}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1789,7 +1842,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7667726, y: 1.2332308}
+  m_Size: {x: 0.45143795, y: 1.2332308}
   m_EdgeRadius: 0
 --- !u!1 &1390459619
 GameObject:
@@ -1835,13 +1888,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e5fe566fef1cc4394c3a8002434ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knightData: {fileID: 11400000, guid: 3a64e06edc5dd9945b947bd6cb1d2d6e, type: 2}
   blockMove: 0
-  scriptAnimation: {fileID: 2052283516}
-  scriptCheckGrounded: {fileID: 1459264463}
+  isGrounded: 0
   rb: {fileID: 1387438596}
-  knightHealth: {fileID: 0}
-  dragonHealth: {fileID: 0}
+  animator: {fileID: 2052283509}
 --- !u!1 &1399353037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1928,7 +1978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1420905775}
   - component: {fileID: 1420905777}
-  - component: {fileID: 1420905776}
+  - component: {fileID: 1420905778}
   m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -1951,8 +2001,21 @@ Transform:
   m_Father: {fileID: 1485611461}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -0.769, z: 0}
---- !u!61 &1420905776
-BoxCollider2D:
+--- !u!114 &1420905777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1420905774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa44ef2a9b029fa478fe19ee86263244, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGrounded: 0
+--- !u!70 &1420905778
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1964,32 +2027,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029515743, y: -0.10152415}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.5101912, y: 0.20393951}
-  m_EdgeRadius: 0
---- !u!114 &1420905777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420905774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f25b6df75682e7f46b4fbfff8a7efaab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGrounded: 0
+  m_Offset: {x: 0.19496971, y: -0.12425913}
+  m_Size: {x: 0.43352118, y: 0.07702377}
+  m_Direction: 1
 --- !u!1 &1426117398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2074,8 +2114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGrounded: 0
---- !u!61 &1459264464
-BoxCollider2D:
+--- !u!70 &1459264464
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2087,19 +2127,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06604557, y: -0.15526688}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4146311, y: 0.31142497}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.05818738, y: -0.19058207}
+  m_Size: {x: 0.45913723, y: 0.09611767}
+  m_Direction: 1
 --- !u!1 &1485611460
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,7 +2139,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1485611461}
-  - component: {fileID: 1485611464}
   - component: {fileID: 1485611463}
   - component: {fileID: 1485611462}
   m_Layer: 0
@@ -2128,13 +2157,14 @@ Transform:
   m_GameObject: {fileID: 1485611460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.7749615, y: 0.9, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 215580657}
   - {fileID: 1420905775}
   - {fileID: 1838215919}
   - {fileID: 1382791815}
+  - {fileID: 1686375104}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2151,7 +2181,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.058341503, y: -0.08922839}
+  m_Offset: {x: 0.083628416, y: -0.08922839}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2162,7 +2192,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.60876846, y: 1.0686371}
+  m_Size: {x: 0.4608035, y: 1.0686371}
   m_EdgeRadius: 0
 --- !u!50 &1485611463
 Rigidbody2D:
@@ -2185,27 +2215,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1485611464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1485611460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8e6bcd18615124c82950ea58a57518, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dragonData: {fileID: 11400000, guid: f9a94072d17fb3d428dba481cf8b378a, type: 2}
-  moveInput: {x: 0, y: 0}
-  blockMove: 0
-  isFlyin: 0
-  rb: {fileID: 1485611463}
-  scriptCheckGrounded: {fileID: 1420905777}
-  anim: {fileID: 215580655}
-  knightHealth: {fileID: 0}
-  dragonHealth: {fileID: 0}
 --- !u!1 &1487672860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2318,9 +2327,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285759ee1e7e8914a98dd1e2e45efde7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charactorData: {fileID: 11400000, guid: 3a64e06edc5dd9945b947bd6cb1d2d6e, type: 2}
   healthBar: {fileID: 204877147}
-  loseHealthPopup: {fileID: 0}
+  loseHealthPopup: {fileID: 7290340803334434388, guid: 884b47c4448b38646b6b003534cb645a, type: 3}
+  healHealthPopup: {fileID: 0}
+--- !u!1 &1686375103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686375104}
+  - component: {fileID: 1686375105}
+  m_Layer: 0
+  m_Name: Movement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1686375104
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686375103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1485611461}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1686375105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686375103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8e6bcd18615124c82950ea58a57518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMove: 0
+  isGrounded: 0
+  rb: {fileID: 1485611463}
+  animator: {fileID: 215580655}
 --- !u!1 &1734744267
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,7 +2479,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838215918}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65, y: 0.19, z: 0}
+  m_LocalPosition: {x: 1.13, y: 0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2904,9 +2961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9a5555d8491542479b62bdc7930bd48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   anim: {fileID: 2052283509}
   rb: {fileID: 1387438596}
-  scriptMovement1: {fileID: 0}
-  scriptCheckGrounded: {fileID: 1459264463}
-  knightHealth: {fileID: 0}
-  state: 0

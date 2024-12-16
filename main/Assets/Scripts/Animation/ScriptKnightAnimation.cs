@@ -1,24 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-public class ScriptAnimation1 : MonoBehaviour
+public class ScriptKnightAnimation : ChuongMono<ScriptKnightAnimation>
 {
-    [SerializeField] private Animator anim;
-    [SerializeField] private Rigidbody2D rb;
-
     
-    [SerializeField] private ScriptCheckGrounded scriptCheckGrounded;
-    
-
     public int state;
     //0: idle, 1:walk, 2: jump, 3: attack, 4: hurt, 
-
-    private void Reset()
+    
+    [SerializeField] private Animator anim;
+    [SerializeField] private Rigidbody2D rb;
+    
+    protected override void LoadComponent()
     {
         anim = GetComponent<Animator>();
         rb = GetComponentInParent<Rigidbody2D>();
-
-        scriptCheckGrounded = transform.parent.GetComponentInChildren<ScriptCheckGrounded>();
     }
     
     private void Update()
@@ -57,9 +52,9 @@ public class ScriptAnimation1 : MonoBehaviour
                 break;
 
             case 2: // đang nhảy
-                if (scriptCheckGrounded.isGrounded && ScriptKnightMovement.Instance.moveX == 0)
+                if (ScriptCheckKnightGrounded.Instance.isGrounded && ScriptKnightMovement.Instance.moveX == 0)
                     state = 0; // đang rơi thành xuống mặt đất
-                if (scriptCheckGrounded.isGrounded && ScriptKnightMovement.Instance.moveX != 0) state = 1; // đang rơi thành chạy
+                if (ScriptCheckKnightGrounded.Instance.isGrounded && ScriptKnightMovement.Instance.moveX != 0) state = 1; // đang rơi thành chạy
 
                 if (Input.GetKeyDown(KeyCode.J)) // đang nhảy ấn Z là JumpAttack
                     anim.SetTrigger("JumpAttack");
