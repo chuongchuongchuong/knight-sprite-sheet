@@ -1,9 +1,9 @@
 ﻿using System;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
-public abstract class ChuongMono<T> : MonoBehaviour where T : ChuongMono<T>
+public abstract class ChuongMono : MonoBehaviour
 {
-    public static T Instance { get; private set; }
     protected virtual void Reset()
     {
         LoadObjects();
@@ -14,25 +14,13 @@ public abstract class ChuongMono<T> : MonoBehaviour where T : ChuongMono<T>
     {
         GuaranteeSingleton();
         GetScriptableDataValue();
-        return;
-        
-        void GuaranteeSingleton()
-        {
-            if (Instance != null && Instance != (T)this)
-            {
-                Debug.LogWarning("More than one " + GetType().Name + " in scene.");
-                return;
-            }
-
-            Instance = (T)this;
-        }
     }
     
     
     // @formatter:off
+    protected virtual void GuaranteeSingleton(){}//Dành cho ChuongMonoSingleton override vào
     protected virtual void LoadComponent(){}// Chuyên để load Component
     protected virtual void LoadObjects(){}//Load các loại Object: GameObject, Prefabs,...
     protected virtual void GetScriptableDataValue(){}// lấy giá trị biến trong Scriptable Data
-    
     // @formatter:on
 }

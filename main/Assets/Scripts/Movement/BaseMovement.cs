@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BaseMovement<T> : ChuongMono<T> where T : BaseMovement<T>
+public class BaseMovement<T> : ChuongMonoSingleton<T> where T : BaseMovement<T>
 {
     protected int _moveSpeed;
     protected int _jumpForce;

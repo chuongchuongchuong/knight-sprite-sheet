@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BaseHealth<T> : ChuongMono<T> where T : BaseHealth<T>
+public abstract class BaseHealth<T> : ChuongMonoSingleton<T> where T : BaseHealth<T>
 {
     protected int maxHealth;
 

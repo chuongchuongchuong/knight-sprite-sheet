@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManagement : ChuongMono<InputManagement>
+public class InputManagement : ChuongMonoSingleton<InputManagement>
 {
     public KeyMap knightKeyMap;
     public KeyMap dragonKeyMap;

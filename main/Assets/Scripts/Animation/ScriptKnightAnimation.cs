@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-public class ScriptKnightAnimation : ChuongMono<ScriptKnightAnimation>
+public class ScriptKnightAnimation : ChuongMonoSingleton<ScriptKnightAnimation>
 {
     
     public int state;

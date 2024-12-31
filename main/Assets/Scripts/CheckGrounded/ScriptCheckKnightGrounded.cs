@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptCheckKnightGrounded : ChuongMono<ScriptCheckKnightGrounded>
+public class ScriptCheckKnightGrounded : ChuongMonoSingleton<ScriptCheckKnightGrounded>
 {
     public bool isGrounded;
 

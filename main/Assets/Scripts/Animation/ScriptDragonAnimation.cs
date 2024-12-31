@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptDragonAnimation : ChuongMono<ScriptDragonAnimation>
+public class ScriptDragonAnimation : ChuongMonoSingleton<ScriptDragonAnimation>
 {
     public int state;
     //0:Idle, 1:Run

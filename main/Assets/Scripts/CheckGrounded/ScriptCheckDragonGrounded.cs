@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScriptCheckDragonGrounded : ChuongMono<ScriptCheckDragonGrounded>
+public class ScriptCheckDragonGrounded : ChuongMonoSingleton<ScriptCheckDragonGrounded>
 {
     public bool isGrounded;
 
